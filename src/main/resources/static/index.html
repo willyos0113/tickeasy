@@ -10,9 +10,75 @@
     />
   </head>
   <body>
-    <section class="section">
-      <h1 class="title">Tickeasy</h1>
-      <h2 class="subtitle">測試</h2>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a
+          class="navbar-item is-size-4 has-text-weight-bold has-text-danger"
+          href="https://bulma.io"
+          >Tickeasy</a
+        >
+
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item"> 我的訂單 </a>
+          <a class="navbar-item"> 我的票券 </a>
+          <a class="navbar-item"> 通知中心 </a>
+
+          <!-- <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"> 更多 </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item"> 關於我們 </a>
+              <a class="navbar-item is-selected"> 工作機會 </a>
+              <a class="navbar-item"> 聯繫我們 </a>
+              <hr class="navbar-divider" />
+              <a class="navbar-item"> 回報問題 </a>
+            </div>
+          </div> -->
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-danger has-text-white">
+                <strong>註冊</strong>
+              </a>
+              <a class="button is-light">登入</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="hero is-fullheight">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title is-1 has-text-weight-bold">
+            探索精彩活動，創造難忘回憶
+          </h1>
+          <p class="subtitle is-4 has-text-weight-light">
+            豐富多彩的活動展演平台，為您提供最優質的購票體驗
+          </p>
+          <div class="buttons is-centered mt-5">
+            <a class="button is-light is-large">
+              <strong>開始購票</strong>
+            </a>
+            <a class="button is-light is-large"> 成為主辦人 </a>
+          </div>
+        </div>
+      </div>
     </section>
   </body>
 </html>
