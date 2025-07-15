@@ -42,6 +42,7 @@ Desktop.ini
 
 ### Log files ###
 *.log
+tickeasy.log*
 
 ### Database ###
 *.db
