@@ -12,12 +12,14 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Entity
 @Table(name = "member")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Slf4j
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
