@@ -12,23 +12,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-//@Configuration
-//@EnableWebSecurity
+import lombok.RequiredArgsConstructor;
+
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(authz -> authz
-				.requestMatchers("/", "/home")
-				.permitAll()
-				.anyRequest()
-				.authenticated())
-				.formLogin(form -> form.defaultSuccessUrl("/")
-						.permitAll());
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.csrf(AbstractHttpConfigurer -> AbstractHttpConfigurer.disable())
+				.authorizeHttpRequests(authorize -> authorize.requestMatchers("/error/**", "/api/auth/**")
+						.permitAll() // 不需身份驗證即可訪問的 api
+						.anyRequest()
+						.authenticated()); // 其餘的 api 都需要身份驗證
 		return http.build();
 	}
 
 	@Bean
-	public UserDetailsService userDetailsService() {
+	UserDetailsService userDetailsService() {
 		UserDetails user = User.builder()
 				.username("admin")
 				.password(passwordEncoder().encode("123456"))
@@ -38,7 +39,7 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 }

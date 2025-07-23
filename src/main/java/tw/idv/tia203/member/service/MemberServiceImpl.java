@@ -3,16 +3,21 @@ package tw.idv.tia203.member.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import lombok.AllArgsConstructor;
 import tw.idv.tia203.common.entity.Core;
 import tw.idv.tia203.common.entity.DataStatus;
 import tw.idv.tia203.member.dao.MemberRepository;
 import tw.idv.tia203.member.entity.Member;
 
 @Service
-public class MemberServiceImpl implements MemberService {
+@AllArgsConstructor
+public class MemberServiceImpl implements MemberService, UserDetailsService {
 
 	@Autowired
 	private MemberRepository repo;
@@ -23,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
 		var core = new Core<Member>();
 
 		// 驗證 userName 不為空
-		if (!StringUtils.hasText(reqMember.getUserName())) {
+		if (!StringUtils.hasText(reqMember.getUsername())) {
 			core.setDataStatus(DataStatus.INVALID);
 			core.setMessage("請輸入帳號");
 			core.setSuccessful(false);
@@ -52,8 +57,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 
 		// 以 userName 比對既有會員沒有重複
-
-		var member = repo.getByUserName(reqMember.getUserName());
+		var member = repo.getByUserName(reqMember.getUsername());
 		if (member != null) {
 			core.setDataStatus(DataStatus.EXECUTION_FAILED);
 			core.setMessage("使用者名稱重複");
@@ -74,5 +78,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<Member> findAllMember() {
 		return repo.findAll();
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return repo.getByUserName(username);
 	}
 }
